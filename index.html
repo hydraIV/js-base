@@ -20,7 +20,7 @@
         alert(a);                    // 3 - a была равна 1 и 2 раза увеличивалась на единицу.
         alert(b);                    // 3 - аналогично 
         */
-        
+ /*       
         // Part2
         var a = 2;
         var x = 1 + (a *= 2);       // x = 1 + (a = a * 2); x = 5
@@ -60,8 +60,37 @@
             break;
         }
 
-        
-        
+        // Part5
+
+        function sum(a,b) {
+            return a + b;
+        }
+        function dif(a,b) {
+            return a - b;
+        }
+        function prod(a,b) {
+            return a * b;
+        }
+        function quo(a,b) {
+            return a / b;
+        }
+*/
+        // Part6
+
+        function mathOperation(arg1, arg2, operation) {
+            switch (operation) {
+                case 'sum': return arg1 + arg2;
+                case 'dif': return arg1 - arg2;
+                case 'prod': return arg1 * arg2;
+                case 'quo': return arg1 / arg2;
+            }
+        }
+
+        var arg1 = parseInt(prompt('Введите arg1'));
+        var arg2 = parseInt(prompt('Введите arg2'));
+        var operation = prompt('sum, dif, prod или quo?');
+        alert (mathOperation(arg1, arg2, operation));
+
 
         /* Lesson_1
         var tempCel = 22;
