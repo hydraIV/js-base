@@ -8,6 +8,119 @@
 </head>
 <body>
     <script>
+        /* Lesson_2
+
+        Part1
+
+        var a = 1, b = 1, c, d;
+        c = ++a; alert(c);           // 2 - Это префиксное инкрементирование. Значение a сразу увеличивается на единицу.
+        d = b++; alert(d);           // 1 - Это постфиксное инкрементирование. Сначала возвращается значение b (1), затем выполняется инкрементирование.
+        c = (2+ ++a); alert(c);      // 5 - a была равна 2 и сразу увеличивается на единицу, 3+2=5.
+        d = (2+ b++); alert(d);      // 4 - b=2, 2+2=4. b будет равна 3 при следующем обращении к ней.
+        alert(a);                    // 3 - a была равна 1 и 2 раза увеличивалась на единицу.
+        alert(b);                    // 3 - аналогично 
+        */
+        
+        // Part2
+
+        var a = 2;
+        var x = 1 + (a *= 2);       // x = 1 + (a = a * 2); x = 5
+
+        // Part3
+
+        var a = parseInt(prompt('Введите a'));
+        var b = parseInt(prompt('Введите b'));
+
+        if(a > 0 && b > 0) {
+            alert(a - b);
+        } else if (a < 0 && b < 0) {
+            alert(a * b);
+        } else {
+            alert (a + b);
+        }
+
+        // Part4
+
+        var a = prompt('Введите a [0..15]');
+        switch (a) {
+            case '1': alert('1');
+            case '2': alert('2');
+            case '3': alert('3');
+            case '4': alert('4');
+            case '5': alert('5');
+            case '6': alert('6');
+            case '7': alert('7');
+            case '8': alert('8');
+            case '9': alert('9');
+            case '10': alert('10');
+            case '11': alert('11');
+            case '12': alert('12');
+            case '13': alert('13');
+            case '14': alert('14');
+            case '15': alert('15');
+            break;
+        }
+
+        // Part5
+
+        function sum(a,b) {
+            return a + b;
+        }
+        function dif(a,b) {
+            return a - b;
+        }
+        function prod(a,b) {
+            return a * b;
+        }
+        function quo(a,b) {
+            return a / b;
+        }
+
+        // Part6
+
+        function mathOperation(arg1, arg2, operation) {
+            switch (operation) {
+                case 'sum': return arg1 + arg2;
+                case 'dif': return arg1 - arg2;
+                case 'prod': return arg1 * arg2;
+                case 'quo': return arg1 / arg2;
+            }
+        }
+
+        var arg1 = parseInt(prompt('Введите arg1'));
+        var arg2 = parseInt(prompt('Введите arg2'));
+        var operation = prompt('sum, dif, prod или quo?');
+        alert (mathOperation(arg1, arg2, operation));
+
+        // Part7
+
+        if (0 > null) {
+            alert('0 > null');
+        } else if (0 < null) {
+            alert('0 < null');
+        } else {
+            alert('0 = null');
+        }
+
+        // 0 = null - При сравнении разных типов данных JS "старается" преобразовать переменные в числа. При преобразовании null в число он становится 0.
+
+        // Part 8
+
+        function power(val, pow) {
+        if (pow != 1) {
+            return val * power(val, pow - 1);
+        } else {
+            return val;
+            }
+        }
+
+        // По сути это цикл с количеством итераций pow.
+
+        var val = parseInt(prompt('Введите число'));
+        var pow = parseInt(prompt('Введите степень'));
+        alert(power(val, pow));
+
+        /* Lesson_1
         var tempCel = 22;
         var tempFar = (9 / 5) * tempCel + 32;
         alert(tempCel + '°C = ' + tempFar + '°F');
@@ -19,6 +132,7 @@
 
         // Если хотя бы один аргумент является строкой, то второй будет также преобразован к строке
         alert('Если хотя бы один аргумент является строкой, то второй будет также преобразован к строке' + 1000 * '108');
+        */
     </script>
 </body>
 </html>
