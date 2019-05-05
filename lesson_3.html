@@ -13,16 +13,16 @@
         function simpleNum (toNum) {
             var toNum;
             var i = 1; // Счетчик первого цикла 1-100
-            while ( i <= toNum) {
+            while ( i <= toNum ) {
                 var count = 0; // Счетчик для определения простого чила
                 var j = 1; // Счетчик второго цикла. При каждом i прогоняем j от 1 до i
-                while (j <= i) {
-                    if (i % j == 0) { // Если остаток от деления равен 0, добавляем к count 1
+                while ( j <= i ) {
+                    if ( i % j == 0 ) { // Если остаток от деления равен 0, добавляем к count 1
                         count++;
                         } 
                     j++;
                     }
-                if (count == 2) {
+                if ( count == 2 ) {
                     console.log(i); // count=2. Число делится на 1 и само на себя
                     } 
                 i++;
@@ -32,7 +32,19 @@
 */    
 
         // Part 2
+        var basket = [[ 1 , 'Щебень', 100 ],
+                      [ 2 , 'Кирпич', 120 ],
+                      [ 3 , 'Отсев', 140 ]];
 
+        function totalCount (basket) {
+            var totalAmount = 0;
+            for ( var i = 0; i < basket.length; i++ ) {
+                totalAmount += basket [i][2];
+            }
+            return totalAmount;
+        }
+
+        console.log (totalCount(basket));
 
 
 
