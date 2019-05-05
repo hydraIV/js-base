@@ -9,7 +9,7 @@
 <body>
     <script>
         // Part 1
-/*
+
         function simpleNum (toNum) {
             var toNum;
             var i = 1; // Счетчик первого цикла 1-100
@@ -29,9 +29,9 @@
                 }
         }
         simpleNum(100);
-*/    
+    
 
-        // Part 2
+        // Part 2-3
         var basket = [[ 1 , 'Щебень', 100 ],
                       [ 2 , 'Кирпич', 120 ],
                       [ 3 , 'Отсев', 140 ]];
@@ -44,12 +44,14 @@
             return totalAmount;
         }
 
-        console.log (totalCount(basket));
+        console.log ('ИТОГО: ' + totalCount(basket));
 
+        // Part 4
+        for ( var i = 0; i < 9; i++, console.log(i) ) {}
 
+        // Part 5
+        for ( var i = ''; i.length <= 20; i+='x', console.log (i) ) {} // В качестве счетчика использую саму строку
 
-
-        
     </script>
 </body>
 </html>
