@@ -4,59 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Lesson 3</title>
+    <title>Lesson 4</title>
 </head>
 <body>
     <script>
         // Part 1
 
-        function isPrime (num) {
-            if (num < 2) {
-                return false;
-            }
-            var i = 2; 
-            while ( i < num ) {
-                if ( num % i === 0 ) { 
-                    return false;
-                    } 
-                i++;
-                }
-                return true;
-        }
+        
 
-        function simpleNum (toNum) {
-            var j = 1; // Счетчик первого цикла 1-100
-            while ( j <= toNum ) {
-                if (isPrime (j)) {
-                    console.log(j);
-                }
-                j++;
-                }
-        }
+        // Part 2
 
-        simpleNum(100);
-    
+        var basket = [{ productName: 'Пицца',
+                        productPrice: 650,
+                        productQuantity: 1, },
+                        
+                      { productName: 'Роллы',
+                        productPrice: 80,
+                        productQuantity: 10, },
+                        
+                      { productName: 'Pepsi',
+                        productPrice: 140,
+                        productQuantity: 2, },];
 
-        // Part 2-3
-        var basket = [[ 1 , 'Щебень', 100, 1 ],
-                      [ 2 , 'Кирпич', 120, 4 ],
-                      [ 3 , 'Отсев', 140, 7 ]];
-
-        function totalCount (basket) {
+        function countTotal (basket, isTip) {
             var totalAmount = 0;
+            var tip = 0.03;
+            var deliveryPrice = 150;
+            var minDelivery = 50000;
+
             for ( var i = 0; i < basket.length; i++ ) {
-                totalAmount += basket [i][2] * basket [i][3];
+                totalAmount += basket [i].productPrice * basket [i].productQuantity;
+                console.log( (i+1) + '. ' + basket[i].productName + ' - ' + basket[i].productQuantity + ' X ' + basket[i].productPrice + ' = ' + basket[i].productQuantity * basket[i].productPrice + ' руб.' );
             }
-            return totalAmount;
+
+            console.log ('Подитог - ' + totalAmount + ' руб.');
+
+            if (totalAmount < minDelivery) {
+                totalAmount += deliveryPrice;
+                console.log ('Сумма заказа меньше ' + minDelivery + ' руб.');
+                console.log ('+ Доставка 150 руб.')
+                console.log ('Подитог - ' + totalAmount + ' руб.');
+            }
+
+            if (isTip) {
+                totalAmount += totalAmount * tip;
+                console.log ('+ Чаевые ' + (totalAmount * tip).toFixed(2) + ' руб. (3%)')
+                console.log ('Подитог - ' + totalAmount + ' руб.');
+            }
+            
+            console.log ('ИТОГО: ' + totalAmount + ' руб.');
         }
 
-        console.log ('ИТОГО: ' + totalCount(basket));
-
-        // Part 4
-        for ( var i = 0; i < 9; i++, console.log(i) ) {}
-
-        // Part 5
-        for ( var i = ''; i.length <= 20; i+='x', console.log (i) ) {} // В качестве счетчика использую саму строку
+        countTotal(basket, true);
 
     </script>
 </body>
