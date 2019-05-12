@@ -10,7 +10,30 @@
     <script>
         // Part 1
 
-        
+        function numToObject (num) {
+    
+            if (num > 999) {
+                console.log ('Введите число меньше 999!');
+                return false;
+            }
+
+            num += '';
+            
+            var arrNum = num.split('');
+
+            while (arrNum.length < 3) {
+                arrNum.unshift('0');
+            }
+            
+            var numObj =    {units: arrNum [2],
+                             tens: arrNum [1],
+                             hundreds: arrNum [0],};
+            return numObj;
+        }
+
+        var num = prompt('Введите число от 0 до 999');
+
+        console.log(numToObject (num));
 
         // Part 2
 
