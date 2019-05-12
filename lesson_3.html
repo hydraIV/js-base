@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lesson 3</title>
+</head>
+<body>
+    <script>
+        // Part 1
+
+        function isPrime (num) {
+            if (num < 2) {
+                return false;
+            }
+            var i = 2; 
+            while ( i < num ) {
+                if ( num % i === 0 ) { 
+                    return false;
+                    } 
+                i++;
+                }
+                return true;
+        }
+
+        function simpleNum (toNum) {
+            var j = 1; // Счетчик первого цикла 1-100
+            while ( j <= toNum ) {
+                if (isPrime (j)) {
+                    console.log(j);
+                }
+                j++;
+                }
+        }
+
+        simpleNum(100);
+    
+
+        // Part 2-3
+        var basket = [[ 1 , 'Щебень', 100, 1 ],
+                      [ 2 , 'Кирпич', 120, 4 ],
+                      [ 3 , 'Отсев', 140, 7 ]];
+
+        function totalCount (basket) {
+            var totalAmount = 0;
+            for ( var i = 0; i < basket.length; i++ ) {
+                totalAmount += basket [i][2] * basket [i][3];
+            }
+            return totalAmount;
+        }
+
+        console.log ('ИТОГО: ' + totalCount(basket));
+
+        // Part 4
+        for ( var i = 0; i < 9; i++, console.log(i) ) {}
+
+        // Part 5
+        for ( var i = ''; i.length <= 20; i+='x', console.log (i) ) {} // В качестве счетчика использую саму строку
+
+    </script>
+</body>
+</html>
