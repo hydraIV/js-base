@@ -10,36 +10,42 @@
     <script>
         // Part 1
 
-        function simpleNum (toNum) {
-            var toNum;
-            var i = 1; // Счетчик первого цикла 1-100
-            while ( i <= toNum ) {
-                var count = 0; // Счетчик для определения простого чила
-                var j = 1; // Счетчик второго цикла. При каждом i прогоняем j от 1 до i
-                while ( j <= i ) {
-                    if ( i % j == 0 ) { // Если остаток от деления равен 0, добавляем к count 1
-                        count++;
-                        } 
-                    j++;
-                    }
-                if ( count == 2 ) {
-                    console.log(i); // count=2. Число делится на 1 и само на себя
+        function isPrime (num) {
+            if (num < 2) {
+                return false;
+            }
+            var i = 2; 
+            while ( i < num ) {
+                if ( num % i === 0 ) { 
+                    return false;
                     } 
                 i++;
                 }
+                return true;
         }
+
+        function simpleNum (toNum) {
+            var j = 1; // Счетчик первого цикла 1-100
+            while ( j <= toNum ) {
+                if (isPrime (j)) {
+                    console.log(j);
+                }
+                j++;
+                }
+        }
+
         simpleNum(100);
     
 
         // Part 2-3
-        var basket = [[ 1 , 'Щебень', 100 ],
-                      [ 2 , 'Кирпич', 120 ],
-                      [ 3 , 'Отсев', 140 ]];
+        var basket = [[ 1 , 'Щебень', 100, 1 ],
+                      [ 2 , 'Кирпич', 120, 4 ],
+                      [ 3 , 'Отсев', 140, 7 ]];
 
         function totalCount (basket) {
             var totalAmount = 0;
             for ( var i = 0; i < basket.length; i++ ) {
-                totalAmount += basket [i][2];
+                totalAmount += basket [i][2] * basket [i][3];
             }
             return totalAmount;
         }
