@@ -14,48 +14,51 @@
 
         // Part 2
 
-        var basket = [{ productName: 'Пицца',
-                        productPrice: 650,
-                        productQuantity: 1, },
+        var basket = { products: [{ productName: 'Пицца',
+                                    productPrice: 650,
+                                    productQuantity: 1, },
+                                    
+                                  { productName: 'Роллы',
+                                    productPrice: 80,
+                                    productQuantity: 10, },
+                                    
+                                  { productName: 'Pepsi',
+                                    productPrice: 140,
+                                    productQuantity: 2, },],
+
+                      tip: 0.03,
+                      deliveryPrice: 150,
+                      minDelivery: 50000,
+
+                      countTotal: function(basket, isTip) {
+
+                        var totalAmount = 0;
+                        for ( var i = 0; i < this.products.length; i++ ) {
+                            totalAmount += this.products [i].productPrice * this.products [i].productQuantity;
+                            console.log( (i+1) + '. ' + this.products [i].productName + ' - ' + this.products [i].productQuantity + ' X ' + this.products [i].productPrice + ' = ' + this.products [i].productQuantity * this.products [i].productPrice + ' руб.' );
+                        }
+
+                        console.log ('Подитог - ' + totalAmount + ' руб.');
+
+                        if (totalAmount < this.minDelivery) {
+                            totalAmount += this.deliveryPrice;
+                            console.log ('Сумма заказа меньше ' + this.minDelivery + ' руб.');
+                            console.log ('+ Доставка 150 руб.')
+                            console.log ('Подитог - ' + totalAmount + ' руб.');
+                        }
+
+                        if (isTip) {
+                            totalAmount += totalAmount * this.tip;
+                            console.log ('+ Чаевые ' + (totalAmount * this.tip).toFixed(2) + ' руб. (3%)')
+                            console.log ('Подитог - ' + totalAmount + ' руб.');
+                        }
                         
-                      { productName: 'Роллы',
-                        productPrice: 80,
-                        productQuantity: 10, },
-                        
-                      { productName: 'Pepsi',
-                        productPrice: 140,
-                        productQuantity: 2, },];
+                        console.log ('ИТОГО: ' + totalAmount + ' руб.');
+                                },};
+                    
 
-        function countTotal (basket, isTip) {
-            var totalAmount = 0;
-            var tip = 0.03;
-            var deliveryPrice = 150;
-            var minDelivery = 50000;
 
-            for ( var i = 0; i < basket.length; i++ ) {
-                totalAmount += basket [i].productPrice * basket [i].productQuantity;
-                console.log( (i+1) + '. ' + basket[i].productName + ' - ' + basket[i].productQuantity + ' X ' + basket[i].productPrice + ' = ' + basket[i].productQuantity * basket[i].productPrice + ' руб.' );
-            }
-
-            console.log ('Подитог - ' + totalAmount + ' руб.');
-
-            if (totalAmount < minDelivery) {
-                totalAmount += deliveryPrice;
-                console.log ('Сумма заказа меньше ' + minDelivery + ' руб.');
-                console.log ('+ Доставка 150 руб.')
-                console.log ('Подитог - ' + totalAmount + ' руб.');
-            }
-
-            if (isTip) {
-                totalAmount += totalAmount * tip;
-                console.log ('+ Чаевые ' + (totalAmount * tip).toFixed(2) + ' руб. (3%)')
-                console.log ('Подитог - ' + totalAmount + ' руб.');
-            }
-            
-            console.log ('ИТОГО: ' + totalAmount + ' руб.');
-        }
-
-        countTotal(basket, true);
+        basket.countTotal(basket, true);
 
     </script>
 </body>
