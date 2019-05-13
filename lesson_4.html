@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lesson 4</title>
+</head>
+<body>
+    <script>
+        // Part 1
+
+        function numToObject (num) {
+    
+            if (num > 999) {
+                console.log ('Введите число меньше 999!');
+                return null;
+            }
+
+            num += '';
+            
+            var arrNum = num.split('');
+
+            while (arrNum.length < 3) {
+                arrNum.unshift('0');
+            }
+            
+            var numObj =    {units: arrNum [2],
+                             tens: arrNum [1],
+                             hundreds: arrNum [0],};
+            return numObj;
+        }
+
+        var num = prompt('Введите число от 0 до 999');
+
+        console.log(numToObject (num));
+
+        // Part 2
+
+        var basket = { products: [{ productName: 'Пицца',
+                                    productPrice: 650,
+                                    productQuantity: 1, },
+                                    
+                                  { productName: 'Роллы',
+                                    productPrice: 80,
+                                    productQuantity: 10, },
+                                    
+                                  { productName: 'Pepsi',
+                                    productPrice: 140,
+                                    productQuantity: 2, },],
+
+                      tip: 0.03,
+                      deliveryPrice: 150,
+                      minDelivery: 50000,
+
+                      countTotal: function(basket, isTip) {
+
+                        var totalAmount = 0;
+                        for ( var i = 0; i < this.products.length; i++ ) {
+                            totalAmount += this.products [i].productPrice * this.products [i].productQuantity;
+                            console.log( (i+1) + '. ' + this.products [i].productName + ' - ' + this.products [i].productQuantity + ' X ' + this.products [i].productPrice + ' = ' + this.products [i].productQuantity * this.products [i].productPrice + ' руб.' );
+                        }
+
+                        console.log ('Подитог - ' + totalAmount + ' руб.');
+
+                        if (totalAmount < this.minDelivery) {
+                            totalAmount += this.deliveryPrice;
+                            console.log ('Сумма заказа меньше ' + this.minDelivery + ' руб.');
+                            console.log ('+ Доставка ' + this.deliveryPrice +'руб.')
+                            console.log ('Подитог - ' + totalAmount + ' руб.');
+                        }
+
+                        if (isTip) {
+                            totalAmount += totalAmount * this.tip;
+                            console.log ('+ Чаевые ' + (totalAmount * this.tip).toFixed(2) + ' руб. (' + this.tip*100 + '%)')
+                            console.log ('Подитог - ' + totalAmount + ' руб.');
+                        }
+                        
+                        console.log ('ИТОГО: ' + totalAmount + ' руб.');
+                                },};
+
+        basket.countTotal(basket, true);
+
+    </script>
+</body>
+</html>
