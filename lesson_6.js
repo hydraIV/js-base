@@ -112,7 +112,6 @@ function handleBuyButtonClick (event) {
     cartProductCount ++;
 
     console.log(cart);
-    countTotal(cart);
 
     cart.push(currentProduct);
 
@@ -120,6 +119,8 @@ function handleBuyButtonClick (event) {
     document.querySelector('#cart').appendChild($newCartProduct);
     $newCartProduct.classList.add('new_cart_product');
     $newCartProduct.textContent = cartProductCount + ' ' + currentProduct.productName + ' ' + currentProduct.productPrice + ' X ' + currentProduct.productQuantity + ' = ' + currentProduct.productPrice * currentProduct.productQuantity;
+    
+    countTotal(cart);
   }
   
 }
@@ -133,8 +134,8 @@ function countTotal(cart) {
 
     for (var i = 0; i < cart.length; i++) {
 
-        totalAmount += cart[i].productPrice * cart[i].productQuantity;
-        count += cart[i].productQuantity;
+        totalAmount += cart[i].productPrice;
+        count ++;
 
     }
     
