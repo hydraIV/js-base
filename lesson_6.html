@@ -40,7 +40,7 @@
             cursor: pointer;
         }
         .modal {
-        display: flex;
+        display: none;
         position: fixed;
         top: 50%;
         left: 50%;
@@ -52,15 +52,14 @@
         z-index: 1010;
         }
         .closed {
-        display: none;
+        display: flex;
         }
-        .modal-overlay {
-        z-index: 1000;
-        position: fixed;
-        top:0;
-        left:0;
-        width: 100%;
-        height: 100%;
+        .close_modal {
+            height: 22px;
+        }
+        .original {
+        max-width: 100%;
+        height: auto;
         }
     </style>
 </head>
@@ -70,10 +69,7 @@
         <div id='products' class='products'></div>
         <div id='cart' class='cart'></div>
     </div>
-    <div id="modal" class="modal">
-        <button class="close_modal" id="close_modal">Закрыть</button>
-    </div>
-    <div class="modal_overlay" id="modal-overlay"></div>
+    <div id="modal" class="modal"></div>
 
 <script src="lesson_6.js"></script>
 

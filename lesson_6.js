@@ -36,10 +36,6 @@ function init() {
     document.querySelector('#cart').appendChild($total);
     $total.id = 'total';
 
-    
-    var $modalOverlay = document.querySelector("#modal_overlay");
-    var $closeModal = document.querySelector("#close_modal");
-
     for (var i = 0; i < productList.length; i++) {
         
         var $singleProduct = document.createElement('div');
@@ -57,7 +53,7 @@ function init() {
         $singleProduct.appendChild($genProductTitle);
 
         var $genProductPrice = document.createElement('div');
-        $genProductPrice.textContent = productList[i].productPrice;
+        $genProductPrice.textContent = productList[i].productPrice + ' руб.';
         $singleProduct.appendChild($genProductPrice);
 
         var $buyButton = document.createElement('button');
@@ -85,18 +81,25 @@ function handleThumbnailClick (event) {
     
     var $modal = document.querySelector('#modal');
     var $original = document.createElement('img');
+    $original.classList.add('original');
+    $modal.innerHTML = '';
     $original.src = productList[+event.target.name].thumbnail;
     document.querySelector('#modal').appendChild($original);
-    modal.classList.toggle("closed");
-    modalOverlay.classList.toggle("closed");
+
+    var $closeModal = document.createElement('button');
+    $closeModal.classList.add('close_modal');
+    $closeModal.id = 'close_modal';
+    $closeModal.textContent = 'Close'
+    document.querySelector('#modal').appendChild($closeModal);
+
+    $modal.classList.toggle("closed");
 
   }
 }
 
 function handleCloseModalClick (event) {
 
-modal.classList.toggle("closed");
-modalOverlay.classList.toggle("closed");
+$modal.classList.toggle('closed');
   
 }
 
