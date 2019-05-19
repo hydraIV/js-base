@@ -27,6 +27,41 @@
             padding: 12px;
             background-color: #21E6C1;
         }
+        .thumbnail {
+            width: 200px;
+            margin: 12px;
+        }
+        .single_product {
+            background-color: #fff;
+            margin-bottom: 30px;
+            padding: 12px;
+        }
+        .thumbnail {
+            cursor: pointer;
+        }
+        .modal {
+        display: flex;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 600px;
+        max-width: 100%;
+        height: 400px;
+        max-height: 100%;
+        z-index: 1010;
+        }
+        .closed {
+        display: none;
+        }
+        .modal-overlay {
+        z-index: 1000;
+        position: fixed;
+        top:0;
+        left:0;
+        width: 100%;
+        height: 100%;
+        }
     </style>
 </head>
 <body>
@@ -35,6 +70,10 @@
         <div id='products' class='products'></div>
         <div id='cart' class='cart'></div>
     </div>
+    <div id="modal" class="modal">
+        <button class="close_modal" id="close_modal">Закрыть</button>
+    </div>
+    <div class="modal_overlay" id="modal-overlay"></div>
 
 <script src="lesson_6.js"></script>
 

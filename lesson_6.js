@@ -1,15 +1,18 @@
 var productList =  [
   { productName: 'Пицца',
     productPrice: 650,
-    productQuantity: 1, },
+    thumbnail: 'http://totopizza.ru/upload/iblock/5cc/5ccf48dc06ef939ad67a5031e23a9443.jpg',
+    original: '', },
                                     
   { productName: 'Роллы',
-    productPrice: 80,
-    productQuantity: 10, },
+    productPrice: 80, 
+    thumbnail: 'http://totopizza.ru/upload/iblock/779/77909b2fb01ae5f383606b7659079e5d.jpg',
+    original: '', },
                                     
   { productName: 'Pepsi',
     productPrice: 140,
-    productQuantity: 2, },
+    thumbnail: 'http://totopizza.ru/upload/iblock/bdb/bdbc7c50869c16282745cc5dd128c880.jpg',
+    original: '', },
 ];
 
 var cart = [];
@@ -33,11 +36,21 @@ function init() {
     document.querySelector('#cart').appendChild($total);
     $total.id = 'total';
 
+    
+    var $modalOverlay = document.querySelector("#modal_overlay");
+    var $closeModal = document.querySelector("#close_modal");
+
     for (var i = 0; i < productList.length; i++) {
         
         var $singleProduct = document.createElement('div');
         $singleProduct.classList.add('single_product');
         document.querySelector('#products').appendChild($singleProduct);
+
+        var $genProductThumbnail = document.createElement('img');
+        $genProductThumbnail.classList.add('thumbnail');
+        $genProductThumbnail.name = i;
+        $genProductThumbnail.src = productList[i].thumbnail;
+        $singleProduct.appendChild($genProductThumbnail);
 
         var $genProductTitle = document.createElement('h1');
         $genProductTitle.textContent = productList[i].productName;
@@ -60,7 +73,31 @@ function init() {
 
         var $products = document.querySelector('#products');
         $products.addEventListener('click', handleBuyButtonClick);
+        $products.addEventListener('click', handleThumbnailClick);
     }
+    
+    $closeModal.addEventListener('click', handleCloseModalClick);
+
+}
+
+function handleThumbnailClick (event) {
+  if (event.target.tagName === 'IMG') {
+    
+    var $modal = document.querySelector('#modal');
+    var $original = document.createElement('img');
+    $original.src = productList[+event.target.name].thumbnail;
+    document.querySelector('#modal').appendChild($original);
+    modal.classList.toggle("closed");
+    modalOverlay.classList.toggle("closed");
+
+  }
+}
+
+function handleCloseModalClick (event) {
+
+modal.classList.toggle("closed");
+modalOverlay.classList.toggle("closed");
+  
 }
 
 function handleBuyButtonClick (event) {
@@ -69,7 +106,7 @@ function handleBuyButtonClick (event) {
     currentProduct = {
       productName: productList[+event.target.name].productName,
       productPrice: productList[+event.target.name].productPrice,
-      productQuantity: +document.querySelector('#inputQuantity').textContent,
+      productQuantity: 1,
     },
 
     cartProductCount ++;
