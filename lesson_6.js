@@ -64,7 +64,7 @@ function init() {
 
         var $inputQuantity = document.createElement('input');
         $inputQuantity.type = 'number';
-        $inputQuantity.id = 'inputQuantity';
+        $inputQuantity.id = 'inputQuantity_' + i;
         $singleProduct.appendChild($inputQuantity);
 
         var $products = document.querySelector('#products');
@@ -93,6 +93,7 @@ function handleThumbnailClick (event) {
     document.querySelector('#modal').appendChild($closeModal);
 
     $modal.classList.toggle("closed");
+    $closeModal.classList.toggle("closed");
 
   }
 }
@@ -109,20 +110,18 @@ function handleBuyButtonClick (event) {
     currentProduct = {
       productName: productList[+event.target.name].productName,
       productPrice: productList[+event.target.name].productPrice,
-      productQuantity: 1,
+      productQuantity: document.querySelector('#inputQuantity_' + event.target.name).value,
     },
 
     cartProductCount ++;
-
-    console.log(cart);
 
     cart.push(currentProduct);
 
     var $newCartProduct = document.createElement('div');
     document.querySelector('#cart').appendChild($newCartProduct);
     $newCartProduct.classList.add('new_cart_product');
-    $newCartProduct.textContent = cartProductCount + ' ' + currentProduct.productName + ' ' + currentProduct.productPrice + ' X ' + currentProduct.productQuantity + ' = ' + currentProduct.productPrice * currentProduct.productQuantity;
-    
+    $newCartProduct.textContent = cartProductCount + ' ' + currentProduct.productName + ' ' + currentProduct.productPrice + ' руб. X ' + currentProduct.productQuantity + ' = ' + currentProduct.productPrice * currentProduct.productQuantity + ' руб.';
+
     countTotal(cart);
   }
   
@@ -137,8 +136,8 @@ function countTotal(cart) {
 
     for (var i = 0; i < cart.length; i++) {
 
-        totalAmount += cart[i].productPrice;
-        count ++;
+        totalAmount += cart[i].productPrice * cart[i].productQuantity;
+        count += +cart[i].productQuantity;
 
     }
     
