@@ -1,133 +1,103 @@
 var productList =  [
-  { productName: 'Пицца',
+  { id: 1,
+    productName: 'Пицца',
     productPrice: 650,
     thumbnail: 'http://totopizza.ru/upload/iblock/5cc/5ccf48dc06ef939ad67a5031e23a9443.jpg',
-    original: '', },
+    productQuantity: 1,},
                                     
-  { productName: 'Роллы',
+  { id: 2,
+    productName: 'Роллы',
     productPrice: 80, 
     thumbnail: 'http://totopizza.ru/upload/iblock/779/77909b2fb01ae5f383606b7659079e5d.jpg',
-    original: '', },
+    productQuantity: 1,},
                                     
-  { productName: 'Pepsi',
+  { id: 3,
+    productName: 'Pepsi',
     productPrice: 140,
     thumbnail: 'http://totopizza.ru/upload/iblock/bdb/bdbc7c50869c16282745cc5dd128c880.jpg',
-    original: '', },
+    productQuantity: 1,},
 ];
 
 var cart = [];
-var cartProductCount = 0;
 
-function init() {
+function buildCatalog() {
+  var $products = document.querySelector('#products');
 
-    var $productsTitle = document.createElement('h1');
-    var $cartTitle = $productsTitle.cloneNode();
+  for (var i = 0; i < productList.length; i++) {
+    var $template = document.querySelector('#template').children[0].cloneNode(true);
 
-    $productsTitle.classList.add('title');
-    $productsTitle.textContent = 'Products';
+    $template.querySelector('.picture').src = productList[i].thumbnail;
+    $template.querySelector('.picture').classList.add('thumbnail');
+    $template.querySelector('.title').textContent = productList[i].productName;
+    $template.querySelector('.price').textContent = productList[i].productPrice + ' руб.';
+    $template.querySelector('.buy_button').textContent = 'Buy';
+    $template.querySelector('.quantity').dataset.id = productList[i].id;
 
-    $cartTitle.classList.add('title');
-    $cartTitle.textContent = 'Cart';
+    $template.querySelector('.buy_button').dataset.src = productList[i].thumbnail;
+    $template.querySelector('.buy_button').dataset.productName = productList[i].productName;
+    $template.querySelector('.buy_button').dataset.productPrice = productList[i].productPrice;
+    $template.querySelector('.buy_button').dataset.id = productList[i].id;
 
-    document.querySelector('#products').appendChild($productsTitle);
-    document.querySelector('#cart').appendChild($cartTitle);
-
-    var $total = document.createElement('div');
-    document.querySelector('#cart').appendChild($total);
-    $total.id = 'total';
-
-    for (var i = 0; i < productList.length; i++) {
-        
-        var $singleProduct = document.createElement('div');
-        $singleProduct.classList.add('single_product');
-        document.querySelector('#products').appendChild($singleProduct);
-
-        var $genProductThumbnail = document.createElement('img');
-        $genProductThumbnail.classList.add('thumbnail');
-        $genProductThumbnail.name = i;
-        $genProductThumbnail.src = productList[i].thumbnail;
-        $singleProduct.appendChild($genProductThumbnail);
-
-        var $genProductTitle = document.createElement('h1');
-        $genProductTitle.textContent = productList[i].productName;
-        $singleProduct.appendChild($genProductTitle);
-
-        var $genProductPrice = document.createElement('div');
-        $genProductPrice.textContent = productList[i].productPrice + ' руб.';
-        $singleProduct.appendChild($genProductPrice);
-
-        var $buyButton = document.createElement('button');
-        $buyButton.classList.add('buy_button');
-        $buyButton.name = i;
-        $buyButton.textContent = 'Buy';
-        $singleProduct.appendChild($buyButton);
-
-        var $inputQuantity = document.createElement('input');
-        $inputQuantity.type = 'number';
-        $inputQuantity.id = 'inputQuantity_' + i;
-        $singleProduct.appendChild($inputQuantity);
-
-        var $products = document.querySelector('#products');
-        $products.addEventListener('click', handleBuyButtonClick);
-        $products.addEventListener('click', handleThumbnailClick);
-    }
-    
-    $closeModal.addEventListener('click', handleCloseModalClick);
-
-}
-
-function handleThumbnailClick (event) {
-  if (event.target.tagName === 'IMG') {
-    
-    var $modal = document.querySelector('#modal');
-    var $original = document.createElement('img');
-    $original.classList.add('original');
-    $modal.innerHTML = '';
-    $original.src = productList[+event.target.name].thumbnail;
-    document.querySelector('#modal').appendChild($original);
-
-    var $closeModal = document.createElement('button');
-    $closeModal.classList.add('close_modal');
-    $closeModal.id = 'close_modal';
-    $closeModal.textContent = 'Close'
-    document.querySelector('#modal').appendChild($closeModal);
-
-    $modal.classList.toggle("closed");
-    $closeModal.classList.toggle("closed");
-
+    $products.appendChild($template);
   }
 }
 
-function handleCloseModalClick (event) {
+function isExist(id) {
+  for (var i = 0; i < cart.length; i++) {
+    if (cart[i].id === id) {
+      return true;
+    }
+  }
+  return false;
+}
 
-$modal.classList.toggle('closed');
-  
+function findIndx (id) {
+  for (var i = 0; i < cart.length; i++) {
+    if (cart[i].id === id) {
+      return i;
+    }
+  }
 }
 
 function handleBuyButtonClick (event) {
   if (event.target.tagName === 'BUTTON') {
-    
-    currentProduct = {
-      productName: productList[+event.target.name].productName,
-      productPrice: productList[+event.target.name].productPrice,
-      productQuantity: document.querySelector('#inputQuantity_' + event.target.name).value,
-    },
-
-    cartProductCount ++;
-
-    cart.push(currentProduct);
-
-    var $newCartProduct = document.createElement('div');
-    document.querySelector('#cart').appendChild($newCartProduct);
-    $newCartProduct.classList.add('new_cart_product');
-    $newCartProduct.textContent = cartProductCount + ' ' + currentProduct.productName + ' ' + currentProduct.productPrice + ' руб. X ' + currentProduct.productQuantity + ' = ' + currentProduct.productPrice * currentProduct.productQuantity + ' руб.';
+    if (isExist(+event.target.dataset.id)) {
+      var indx = findIndx(+event.target.dataset.id);
+      cart[indx].quantity++;
+    } else {
+      cart.push({
+        id: +event.target.dataset.id,
+        productName: event.target.dataset.productName,
+        productPrice: +event.target.dataset.productPrice,
+        thumbnail: event.target.dataset.src,
+        productQuantity: 1,
+      });
+    }
 
     countTotal(cart);
+    buildCart(cart);
+
   }
   
 }
 
-window.addEventListener('load', init);
+function init() {
+
+  buildCatalog();
+  buildCart(cart);
+
+  var $products = document.querySelector('#products');
+  $products.addEventListener('click', handleBuyButtonClick);
+
+  var $total = document.createElement('div');
+  document.querySelector('#cart').appendChild($total);
+  $total.id = 'total';
+
+  var $cartProductList = document.createElement('div');
+  document.querySelector('#cart').appendChild($cartProductList);
+  $cartProductList.id = 'cartProductList';
+
+}
 
 function countTotal(cart) {
 
@@ -156,3 +126,17 @@ function countTotal(cart) {
     document.querySelector('#total').textContent = message;
 
 }
+
+function buildCart(cart) {
+  $cartProductList = document.querySelector('#cartProductList');
+
+  
+  for (var i = 0; i < cart.length; i++) {
+    
+    var $cartProduct = document.createElement('div');
+    $cartProduct.textContent = productList[i].productName;
+    $cartProductList.appendChild($cartProduct);
+  }
+}
+
+window.addEventListener('load', init);

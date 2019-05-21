@@ -64,15 +64,26 @@
             margin-bottom: 20px;
             font-weight: 800;
         }
+        #template {
+            display: none;
+        }
     </style>
 </head>
 <body>
-    
+    <div id="template">
+        <li>
+            <img class="picture" />
+            <h3 class="title"></h3>
+            <p class="price"></p>
+            <button class="buy_button"></button>
+            <input type="number" class='quantity'>
+        </li>
+    </div>
+
     <div class='wrap'>
-        <div id='products' class='products'></div>
+        <ul id='products' class='products'></ul>
         <div id='cart' class='cart'></div>
     </div>
-    <div id="modal" class="modal"></div>
 
 <script src="lesson_6.js"></script>
 
