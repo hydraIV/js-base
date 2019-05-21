@@ -87,6 +87,8 @@ function init() {
   buildCart(cart);
 
   var $products = document.querySelector('#products');
+  var $cart = document.querySelector('#cart');
+
   $products.addEventListener('click', handleBuyButtonClick);
 
   var $total = document.createElement('div');
@@ -94,7 +96,7 @@ function init() {
   $total.id = 'total';
 
   var $cartProductList = document.createElement('div');
-  document.querySelector('#cart').appendChild($cartProductList);
+  $cart.appendChild($cartProductList);
   $cartProductList.id = 'cartProductList';
 
 }
@@ -124,18 +126,17 @@ function countTotal(cart) {
     }
 
     document.querySelector('#total').textContent = message;
+    document.querySelector('#cartProductList').innerHTML = '';
 
 }
 
 function buildCart(cart) {
-  $cartProductList = document.querySelector('#cartProductList');
 
-  
   for (var i = 0; i < cart.length; i++) {
     
     var $cartProduct = document.createElement('div');
-    $cartProduct.textContent = productList[i].productName;
-    $cartProductList.appendChild($cartProduct);
+    $cartProduct.textContent = productList[i].id + ' - ' + productList[i].productName + ' - ' + productList[i].productQuantity;
+    document.querySelector('#cartProductList').appendChild($cartProduct);
   }
 }
 
