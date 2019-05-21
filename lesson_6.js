@@ -63,7 +63,7 @@ function handleBuyButtonClick (event) {
   if (event.target.tagName === 'BUTTON') {
     if (isExist(+event.target.dataset.id)) {
       var indx = findIndx(+event.target.dataset.id);
-      cart[indx].quantity++;
+      cart[indx].productQuantity++;
     } else {
       cart.push({
         id: +event.target.dataset.id,
