@@ -135,9 +135,11 @@ function buildCart(cart) {
   for (var i = 0; i < cart.length; i++) {
     
     var $cartProduct = document.createElement('div');
-    $cartProduct.textContent = productList[i].id + ' - ' + productList[i].productName + ' - ' + productList[i].productQuantity;
+    $cartProduct.textContent = cart[i].id + ' - ' + cart[i].productName + ' - ' + cart[i].productQuantity;
     document.querySelector('#cartProductList').appendChild($cartProduct);
   }
+
+  console.log(cart);
 }
 
 window.addEventListener('load', init);
