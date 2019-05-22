@@ -144,7 +144,7 @@ function createFood() {
 
     var $foodCell = $gameTable.children[foodY].children[foodX];
 
-    if(!snake.includes($foodCell) && !snake.includes(document.querySelector('.stone-unit'))) {
+    if(!snake.includes($foodCell) && !snake.includes()) {
       $foodCell.classList.add('food-unit');
 
       break;
@@ -159,7 +159,7 @@ function createStone() {
 
     var $stoneCell = $gameTable.children[stoneY].children[stoneX];
 
-    if(!snake.includes($stoneCell) && !snake.includes(document.querySelector('.food-unit'))) {
+    if(!snake.includes($stoneCell) && !snake.includes()) {
       $stoneCell.classList.add('stone-unit');
 
       break;
