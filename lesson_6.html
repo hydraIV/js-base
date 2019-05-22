@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Lesson 6 cart</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        .wrap {
+            display: flex;
+            margin: 0 auto;
+            width: 90vw;
+            background-color: #EDF3F7;
+        }
+        .products {
+            width: 60vw;
+            padding: 12px;
+        }
+        .cart {
+            width: 30vw;
+            padding: 12px;
+            background-color: #21E6C1;
+        }
+        .thumbnail {
+            width: 200px;
+            margin: 12px;
+        }
+        .single_product {
+            background-color: #fff;
+            margin-bottom: 30px;
+            padding: 12px;
+        }
+        .thumbnail {
+            cursor: pointer;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            max-width: 100%;
+            height: 400px;
+            max-height: 100%;
+            z-index: 1010;
+        }
+        .closed {
+            display: flex;
+        }
+        .close_modal {
+            height: 22px;
+        }
+        .original {
+            max-width: 100%;
+            height: auto;
+        }
+        #total {
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+        #template {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="template">
+        <li>
+            <img class="picture" />
+            <h3 class="title"></h3>
+            <p class="price"></p>
+            <button class="buy_button"></button>
+            <input type="number" class='quantity'>
+        </li>
+    </div>
+
+    <div class='wrap'>
+        <ul id='products' class='products'></ul>
+        <div id='cart' class='cart'></div>
+    </div>
+
+<script src="lesson_6.js"></script>
+
+</body>
+</html>
