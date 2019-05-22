@@ -78,7 +78,20 @@ function move() {
   }
 
   if(!inBounds()) {
-    gameOver();
+    switch(direction) {
+      case 'top':
+        snakeCoordY = SIZE.HEIGHT;
+        break;
+      case 'bottom':
+        snakeCoordY = -1;
+        break;
+      case 'left':
+        snakeCoordX = SIZE.WIDTH;
+        break;
+      case 'right':
+        snakeCoordX = -1;
+        break;
+    }
     return;
   }
 
