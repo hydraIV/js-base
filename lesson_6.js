@@ -82,6 +82,15 @@ function handleBuyButtonClick (event) {
   
 }
 
+function handleDeleteClick (event) {
+  if (event.target.tagName === 'BUTTON') {
+    cart.splice(event.target.dataset.id, 1);
+    console.log(cart);
+    countTotal(cart);
+    buildCart(cart);
+  }
+}
+
 function init() {
 
   buildCatalog();
@@ -99,6 +108,8 @@ function init() {
   var $cartProductList = document.createElement('div');
   $cart.appendChild($cartProductList);
   $cartProductList.id = 'cartProductList';
+
+  $cartProductList.addEventListener('click', handleDeleteClick);
 
 }
 
@@ -136,10 +147,15 @@ function buildCart(cart) {
   for (var i = 0; i < cart.length; i++) {
     
     var $cartProduct = document.createElement('div');
-    $cartProduct.textContent = cart[i].id + ' - ' + cart[i].productName + ' - ' + cart[i].productQuantity;
+    $cartProduct.textContent = cart[i].id + ' - ' + cart[i].productName + ' - ' + cart[i].productPrice + ' руб. Х ' + cart[i].productQuantity + ' шт. =  ' + cart[i].productPrice * cart[i].productQuantity + ' руб.';
     document.querySelector('#cartProductList').appendChild($cartProduct);
-  }
 
+    var $deleteProduct = document.createElement('button');
+    $deleteProduct.dataset.id = i;
+    $deleteProduct.textContent = 'delete';
+
+    $cartProduct.appendChild($deleteProduct);
+  }
   console.log(cart);
 }
 
