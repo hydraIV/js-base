@@ -31,7 +31,8 @@ function buildCatalog() {
     $template.querySelector('.title').textContent = productList[i].productName;
     $template.querySelector('.price').textContent = productList[i].productPrice + ' руб.';
     $template.querySelector('.buy_button').textContent = 'Buy';
-    $template.querySelector('.quantity').dataset.id = productList[i].id;
+    $template.querySelector('.quantity').id = 'quantity_' + productList[i].id;
+    $template.querySelector('.quantity').value = 1;
 
     $template.querySelector('.buy_button').dataset.src = productList[i].thumbnail;
     $template.querySelector('.buy_button').dataset.productName = productList[i].productName;
@@ -70,7 +71,7 @@ function handleBuyButtonClick (event) {
         productName: event.target.dataset.productName,
         productPrice: +event.target.dataset.productPrice,
         thumbnail: event.target.dataset.src,
-        productQuantity: 1,
+        productQuantity: document.querySelector('#quantity_' + event.target.dataset.id).value,
       });
     }
 
