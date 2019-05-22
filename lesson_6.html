@@ -67,6 +67,26 @@
         #template {
             display: none;
         }
+        .accordion {
+        background-color: #eee;
+        color: #444;
+        cursor: pointer;
+        padding: 18px;
+        width: 100%;
+        text-align: left;
+        border: none;
+        outline: none;
+        transition: 0.4s;
+        }
+        .active, .accordion:hover {
+        background-color: #ccc;
+        }
+        .panel {
+        padding: 0 18px;
+        background-color: white;
+        display: none;
+        overflow: hidden;
+        }
     </style>
 </head>
 <body>
@@ -82,7 +102,23 @@
 
     <div class='wrap'>
         <ul id='products' class='products'></ul>
-        <div id='cart' class='cart'></div>
+        <div class='cart'>
+            <button class="accordion">Состав корзины</button>
+            <div class="panel" id="cart" style="display: block;">
+            </div>
+
+            <button class="accordion">Адрес доставки</button>
+            <div class="panel">
+                <input type="text" id="delivery">
+            </div>
+
+            <button class="accordion">Комментарий</button>
+            <div class="panel">
+                <textarea rows="10" cols="45" name="text"></textarea>
+            </div>
+            <div class="total_div" id="total_div"></div>
+            <input type="submit" value="Отправить">
+        </div>
     </div>
 
 <script src="lesson_6.js"></script>
