@@ -104,6 +104,10 @@ function move() {
       var $snakeRemoved = snake.shift();
       $snakeRemoved.classList.remove('snake-unit');
     }
+
+    if(isStone($newUnit)) {
+      gameOver();
+    }
   } else {
     gameOver();
   }
@@ -118,6 +122,15 @@ function isFood(unit) {
     clearInterval(interval);
     interval = setInterval(move, SNAKE_SPEED);
     createFood();
+    createStone();
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function isStone(unit) {
+  if(unit.classList.contains('stone-unit')) {
     return true;
   } else {
     return false;
@@ -131,8 +144,23 @@ function createFood() {
 
     var $foodCell = $gameTable.children[foodY].children[foodX];
 
-    if(!snake.includes($foodCell)) {
+    if(!snake.includes($foodCell) && !snake.includes(document.querySelector('.stone-unit'))) {
       $foodCell.classList.add('food-unit');
+
+      break;
+    }
+  }
+}
+
+function createStone() {
+  while(true) {
+    var stoneX = Math.floor(Math.random() * SIZE.WIDTH);
+    var stoneY = Math.floor(Math.random() * SIZE.HEIGHT);
+
+    var $stoneCell = $gameTable.children[stoneY].children[stoneX];
+
+    if(!snake.includes($stoneCell) && !snake.includes(document.querySelector('.food-unit'))) {
+      $stoneCell.classList.add('stone-unit');
 
       break;
     }
@@ -144,6 +172,7 @@ function handleStartClick(event) {
 
   interval = setInterval(move, SNAKE_SPEED);
   createFood();
+  createStone();
 }
 
 function handleRenewClick(event) {
