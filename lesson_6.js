@@ -82,6 +82,17 @@ function handleBuyButtonClick (event) {
   
 }
 
+
+function handleDeleteClick (event) {
+  if (event.target.tagName === 'BUTTON') {
+    cart.splice(event.target.dataset.id, 1);
+    console.log(cart);
+    countTotal(cart);
+    buildCart(cart);
+  }
+}
+
+
 function init() {
 
   buildCatalog();
@@ -93,12 +104,18 @@ function init() {
   $products.addEventListener('click', handleBuyButtonClick);
 
   var $total = document.createElement('div');
-  document.querySelector('#cart').appendChild($total);
+
+  document.querySelector('#total_div').appendChild($total);
+
   $total.id = 'total';
 
   var $cartProductList = document.createElement('div');
   $cart.appendChild($cartProductList);
   $cartProductList.id = 'cartProductList';
+
+
+  $cartProductList.addEventListener('click', handleDeleteClick);
+
 
 }
 
@@ -136,11 +153,35 @@ function buildCart(cart) {
   for (var i = 0; i < cart.length; i++) {
     
     var $cartProduct = document.createElement('div');
-    $cartProduct.textContent = cart[i].id + ' - ' + cart[i].productName + ' - ' + cart[i].productQuantity;
-    document.querySelector('#cartProductList').appendChild($cartProduct);
-  }
 
+    $cartProduct.textContent = cart[i].id + ' - ' + cart[i].productName + ' - ' + cart[i].productPrice + ' руб. Х ' + cart[i].productQuantity + ' шт. =  ' + cart[i].productPrice * cart[i].productQuantity + ' руб.';
+    document.querySelector('#cartProductList').appendChild($cartProduct);
+
+    var $deleteProduct = document.createElement('button');
+    $deleteProduct.dataset.id = i;
+    $deleteProduct.textContent = 'delete';
+
+    $cartProduct.appendChild($deleteProduct);
+  }
   console.log(cart);
+}
+
+// Accordion
+var acc = document.getElementsByClassName('accordion');
+
+for (var i = 0; i < acc.length; i++) {
+  acc[i].addEventListener('click', function() {
+
+    this.classList.toggle('active');
+
+    var panel = this.nextElementSibling;
+    if (panel.style.display === 'block') {
+      panel.style.display = 'none';
+    } else {
+      panel.style.display = 'block';
+    }
+  });
+
 }
 
 window.addEventListener('load', init);
