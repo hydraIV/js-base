@@ -144,7 +144,7 @@ function createFood() {
 
     var $foodCell = $gameTable.children[foodY].children[foodX];
 
-    if(!snake.includes($foodCell) && !snake.includes()) {
+    if(!snake.includes($foodCell) && !$foodCell.classList.contains('stone-unit')) {
       $foodCell.classList.add('food-unit');
 
       break;
